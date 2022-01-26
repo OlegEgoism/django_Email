@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'reactdjango',
     'rest_framework',
     'corsheaders',
     'api',
@@ -130,3 +131,15 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
     ]
 }
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'vp3231963@gmail.com'
+EMAIL_HOST_PASSWORD = 'dinamo258'
+EMAIL_PORT = 587
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3080",
+]
+
