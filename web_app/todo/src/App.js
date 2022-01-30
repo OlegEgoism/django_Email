@@ -8,6 +8,7 @@ class App extends Component{
         all_car:[],
         }
     }
+
     componentDidMount() {
     fetch('http://127.0.0.1:8000/car/')
     .then(response=>response.json())
