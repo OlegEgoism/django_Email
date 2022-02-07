@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework import routers
+
+from accaunt.views import SimpleApI
 from api.views import get_presente, all_shop, all_mag, Magazik
 from reactdjango.views import CarViewSet
 from stas_class.views import ZawodList, CreateZawod, ZawodDetail, StartViewSet
+from rest_framework_simplejwt import views as jwt_views
 
 router = routers.SimpleRouter()
 router.register(r'zawod', ZawodDetail)
@@ -28,7 +31,13 @@ urlpat = router.urls
 router.register(r'car', CarViewSet, basename='car')
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('accaunt.urls')),
+    path('api/hello', SimpleApI.as_view()),
+    path('api/token/', jwt_views.TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(), name='token_refresh'),
+
+    path('accaunt/', include('accaunt.urls')),
+    path('svazi/', include('svazi.urls')),
+
     # path('presente/', get_presente, name='presente'),
     # path('shop/<int:id>', all_shop, name='all_shop'),
     # path('mag/',all_mag),
@@ -36,6 +45,7 @@ urlpatterns = [
     # path('zaw/', CreateZawod.as_view())
     # path('prod/',)
     *urlpat,
+
 
 ]
 urlpatterns +=router.urls

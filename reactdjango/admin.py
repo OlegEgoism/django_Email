@@ -1,6 +1,8 @@
 from django.contrib import admin
 
 # Register your models here.
-from reactdjango.models import Car
+from reactdjango.models import *
 
 admin.site.register(Car)
+
+

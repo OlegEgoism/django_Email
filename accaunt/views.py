@@ -2,12 +2,15 @@ from django.contrib.auth.models import User
 from django.core.mail import send_mail
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
+from django.forms import formset_factory
+from django.shortcuts import render
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+from accaunt.forms import BookForm
 from accaunt.serializers import UserRegisterationsSerializer
 
 
@@ -46,3 +49,45 @@ def my_handler(sender, **kwargs):
         ['olegpustovalov220@gmail.com'],
         fail_silently=False,
     )
+
+
+class SimpleApI(APIView):
+    permission_classes = (IsAuthenticated,)
+    def get(self, request):
+        content = {'message': 'Hello, World!'}
+        return Response(content)
+
+
+
+def book(request):
+    return render(request, template_name='home.html', context={'formset': formset_factory(BookForm), })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # models = Samples
+    # template_name = 'home.html'
+    # context_object_name = 'samples'
+    # paginate_by = 2
+    #
+    # def get_queryset(self):
+    #     return Samples.objects.filter(published=True)
+    #
+    # def get_context_data(self, *, object_list=None, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['title'] = 'Семплы'
+    #     context['style'] = Style.objects.all()
+    #     context['author'] = Author.objects.all()
+    #     return context
+
+
