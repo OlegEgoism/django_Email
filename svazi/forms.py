@@ -2,7 +2,7 @@ from django import forms
 from .models import *
 
 
-class BookForm(forms.Form):
+class BookForm(forms.ModelForm):
     # name = forms.CharField(max_length=250, label='Имя')
     # price = forms.DecimalField(max_digits=8, decimal_places=2, label='Цена')
     # author = forms.ModelMultipleChoiceField(queryset=Author.objects.all(), label='Автор')
